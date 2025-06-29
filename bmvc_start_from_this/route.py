@@ -1,6 +1,7 @@
 from app.controllers.application import Application
 from bottle import Bottle, run, request, static_file
 
+usuarios_cadastrados = []
 app = Bottle()
 
 # Rota para a página inicial
@@ -12,7 +13,7 @@ def index():
 # Formulário de cadastro
 @app.route('/application/cadastrar', method=['POST'])
 def cadastrar_usuario():
-    ctl = Application(request)
+    ctl = Application(request, usuarios_cadastrados)
     return ctl.cadastrar()
 
 # Rotas específicas de páginas (se precisar)

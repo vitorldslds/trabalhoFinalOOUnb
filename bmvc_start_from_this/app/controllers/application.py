@@ -1,3 +1,4 @@
+from app.models.usuario import Usuario
 from bmvc.controller import Controller
 
 class Application(Controller):
@@ -11,25 +12,31 @@ class Application(Controller):
                     return "Erro: É necessário ter 18 anos ou mais para se cadastrar"
             except ValueError:
                 return "Erro: Idade inválida. Digite apenas números."
-            
+
             email = self.request.forms.get("email")
+
+            for u in self.usuarios_cadastrados:
+                if u.email == email:
+                    return "Erro: Já existe um usuário com esse e-mail"
+
             senha = self.request.forms.get("senha")
-            genero = self.request.forms.get("genero")
+            genero = int(self.request.forms.get("genero"))
             interesses = self.request.forms.get("interesses")
-            descricao = self.request.forms.get("descrição")
-            opção_sexual = self.request.forms.get("opção_sexual")
+            descricao = self.request.forms.get("descricao")
+            opcao_sexual = int(self.request.forms.get("opcao_sexual"))
 
-            print("📥 Novo cadastro recebido:")
-            print(f"Nome: {nome}")
-            print(f"Idade: {idade}")
-            print(f"E-mail: {email}")
-            print(f"Senha: {senha}")
-            print(f"Gênero: {genero}")
-            print(f"Interesses: {interesses}")
+            novo_usuario = Usuario(
+                email=email,
+                senha=senha,
+                nome=nome,
+                idade=idade_int,
+                genero=genero,
+                interresses=interesses,
+                descricao=descricao,
+                opcao_sexual=opcao_sexual
+            )
 
-            # Simulação de banco de dados: salvando em arquivo
-            with open("dados_cadastrados.txt", "a", encoding="utf-8") as f:
-                f.write(f"{nome};{idade_int};{email};{senha};{genero};{interesses};{descricao};{opção_sexual}\n")
+            self.usuarios_cadastrados.append(novo_usuario)
 
             return self.view("app/views/html/sucesso.html")  # redireciona para página de sucesso
         else:
