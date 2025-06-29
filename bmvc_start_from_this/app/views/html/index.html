@@ -2,19 +2,19 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Namoro App - Cadastro</title>
+  <title>LoveConnect - Cadastro</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
 <body class="bg-pink-50 flex items-center justify-center h-screen">
 
   <form action="/application/cadastrar" method="post" class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
-    <h2 class="text-2xl font-bold text-center mb-6 text-pink-600">Cadastre-se no Namoro App</h2>
+    <h2 class="text-2xl font-bold text-center mb-6 text-pink-600">Cadastre-se no LoveConnect</h2>
 
     <label class="block mb-2">Nome</label>
     <input name="nome" required class="w-full p-2 mb-4 border rounded" type="text" />
 
     <label class="block mb-2">Idade</label>
-    <input name="idade" required class="w-full p-2 mb-4 border rounded" type="number" />
+    <input name="idade" required min="18" step="1" class="w-full p-2 mb-4 border rounded" type="number" />
 
     <label class="block mb-2">E-mail</label>
     <input name="email" required class="w-full p-2 mb-4 border rounded" type="email" />
@@ -24,17 +24,32 @@
 
     <label class="block mb-2">Gênero</label>
     <select name="genero" required class="w-full p-2 mb-4 border rounded">
-      <option value="masculino">Masculino</option>
-      <option value="feminino">Feminino</option>
-      <option value="outro">Outro</option>
+      <option value= 0 >Masculino</option>
+      <option value= 1 >Feminino</option>
+      <option value= 2 >Outro</option>
+    </select>
+
+    
+    <label class="block mb-2">Orientação Sexual</label>
+    <select name="opção_sexual" required class="w-full p-2 mb-4 border rounded">
+      <option value= 0 >Heterossexual</option>
+      <option value= 1 >Homossexual</option>
+      <option value= 2 >Bisexual</option>
     </select>
 
     <label class="block mb-2">Interesses</label>
     <input name="interesses" placeholder="Ex: música, viagens..." class="w-full p-2 mb-4 border rounded" type="text" />
 
+    <label class="block mb-2">Descrição</label>
+    <input name="descricao" placeholder="Ex: Sou extrovertido(a), fitness..." class="w-full p-2 mb-4 border rounded" type="text" />
+
     <button class="w-full bg-pink-500 text-white p-2 rounded hover:bg-pink-600" type="submit">
       Cadastrar
     </button>
+    <p class="text-center mt-4 text-sm">
+      Já tem cadastro?
+      <a href="/login" class="text-pink-600 hover:underline">Clique aqui para fazer login</a>
+    </p>
   </form>
 
 </body>
