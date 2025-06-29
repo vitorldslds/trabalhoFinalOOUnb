@@ -8,7 +8,7 @@ app = Bottle()
 @app.route('/')
 @app.route('/index.html')
 def index():
-    return static_file('index.html', root='./html')
+    return static_file('index.html', root='./app/views/html')
 
 # Rotas específicas
 @app.route('/pagina', method=['GET'])
